@@ -1,0 +1,36 @@
+-- SPOTIFY
+menu_spotify = hs.menubar.new()
+menu_spotify_up = hs.menubar.new()
+menu_spotify_down = hs.menubar.new()
+function setSpotifyDisplay(state)
+    if state then
+        menu_spotify:setTitle("PAUSE )")
+        hs.spotify.play();
+    else
+        menu_spotify:setTitle("PLAY )")
+        hs.spotify.pause();
+    end
+end
+function spotifyClicked()
+    setSpotifyDisplay(hs.caffeinate.toggle("displayIdle"))
+end
+if menu_spotify then
+    menu_spotify:setClickCallback(spotifyClicked)
+    setSpotifyDisplay(hs.caffeinate.get("displayIdle"))
+end
+
+-- VOLUME UP
+if menu_spotify_up then
+    menu_spotify_up:setClickCallback(function() 
+        hs.spotify.volumeUp()
+    end)
+    menu_spotify_up:setTitle("▲ )")
+end
+
+-- VOLUME DOWN 
+if menu_spotify_down then
+    menu_spotify_down:setClickCallback(function()
+        hs.spotify.volumeDown()
+    end)
+    menu_spotify_down:setTitle("( ▼")
+end
